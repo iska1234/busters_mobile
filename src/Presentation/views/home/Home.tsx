@@ -23,7 +23,7 @@ export const HomeScreen = ({navigation, route}: Props) => {
 
     useEffect(() => {
         if(user?.userId !== null && user?.userId !== undefined){
-            navigation.replace('ProfileInfoScreen')
+            navigation.replace('UserTabsNavigation')
         }
     },[user])
 
