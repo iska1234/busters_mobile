@@ -24,4 +24,11 @@ export class UserLocalRepositoryImpl implements UserLocalRepository {
         const user: SessionPayload = JSON.parse(data as any);
         return user;
     }
+
+    async remove(): Promise<void> {
+        const {remove} = LocalStorage();
+        await remove('user')
+        await remove('token')
+    }
+
 }

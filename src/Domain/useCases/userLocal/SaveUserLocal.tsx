@@ -3,7 +3,7 @@ import { SessionPayload } from "../../entities/SessionPayload";
 
 const {save} = new UserLocalRepositoryImpl();
 
-export const SaveUserUseCase = async(payload: SessionPayload) => {
+export const SaveUserLocalUseCase = async(payload: SessionPayload) => {
     
     return await save(payload);
 }

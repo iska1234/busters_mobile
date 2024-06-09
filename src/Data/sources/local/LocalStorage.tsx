@@ -18,8 +18,17 @@ export const LocalStorage = () => {
         }
     }
 
+    const remove = async (key: string) => {
+        try {
+            await AsyncStorage.removeItem(key);
+        } catch (error) {
+            console.log('Error en Local Storage:' + error)
+        }
+    }
+
     return{
         save,
-        getItem
+        getItem,
+        remove
     }
 }

@@ -5,16 +5,27 @@ import { RoundedButton } from '../../components/RoundedButton';
 import { useEffect, useState } from 'react';
 import useViewModel from './ViewModel'
 import { CustomTextInput } from '../../components/CustomTextInput';
+import { useNavigation } from '@react-navigation/native';
+import { RootStackParamList } from '../../../../App';
+import {StackNavigationProp, StackScreenProps} from '@react-navigation/stack'
 
-export const HomeScreen = () => {
+interface Props extends StackScreenProps<RootStackParamList, 'HomeScreen'>{};
 
-    const { email, password, onChange, errorMessage, login } = useViewModel();
+export const HomeScreen = ({navigation, route}: Props) => {
+
+    const { email, password, onChange, errorMessage, login, user } = useViewModel(); 
 
     useEffect(() => {
         if (errorMessage != '') {
             ToastAndroid.show(errorMessage, ToastAndroid.LONG)
         }
     }, [errorMessage])
+
+    useEffect(() => {
+        if(user?.userId !== null && user?.userId !== undefined){
+            navigation.replace('ProfileInfoScreen')
+        }
+    },[user])
 
     return (
         <View style={styles.container}>
