@@ -2,21 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { LoginAuthUseCase } from '../../../Domain/useCases/Auth/LoginAuth'
 import { SaveUserUseCase } from '../../../Domain/useCases/userLocal/SaveUser'
 import { GetUserUseCase } from '../../../Domain/useCases/userLocal/GetUser'
+import { useUserLocal } from '../../hooks/useUserLocal'
 
 
 const HomeViewModel = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [values, setValues] = useState({ email: '', password: '' })
+    const {user} = useUserLocal()
 
-    useEffect(()=>{
-        getUserSession();
-    }, [])
-
-    const getUserSession = async () => {
-        const user = await GetUserUseCase();
-        console.log('session:'+ user?.role+ user?.userId)
-    };
-    
 
     const onChange = (property: string, value: any) => {
         setValues({ ...values, [property]: value })
