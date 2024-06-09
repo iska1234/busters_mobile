@@ -16,27 +16,14 @@ export class AuthRepositoryImpl implements AuthRepository {
             });
             const token = response.data.data.token;
             
-            // Save token to local storage
             const { save } = LocalStorage();
             await save('token', token);
             return Promise.resolve(response.data);
 
         } catch (error) {
-            console.error("Login error:", error);
-            const axiosError = error as AxiosError<ResponseApiBusters>;
-            if (axiosError.response && axiosError.response.data) {
-                console.error("Axios error response data:", axiosError.response.data);
-                return axiosError.response.data;
-            }
-
-            console.error("Unknown error:", axiosError.message);
-            return Promise.resolve({
-                success: false,
-                message: "Error desconocido",
-                error: {
-                    message: axiosError.message
-                }
-            });
+            let e = (error as AxiosError);
+            const apiError:ResponseApiBusters = JSON.parse(JSON.stringify(e.response?.data)); 
+            return Promise.resolve(apiError)
         }
     }
 }

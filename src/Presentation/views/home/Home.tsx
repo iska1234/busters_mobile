@@ -30,7 +30,7 @@ export const HomeScreen = ({navigation, route}: Props) => {
     return (
         <View style={styles.container}>
             <Image
-                source={require('../../../../assets/chofer.png')}
+                source={require('../../../../assets/busters.png')}
                 style={styles.imageBackground}
             />
 
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
 
     imageBackground: {
         width: '100%',
-        height: '100%',
-        opacity: 0.6,
-        bottom: '30%'
+        height: '80%',
+
+        bottom: '0%'
     },
     form: {
         width: '100%',

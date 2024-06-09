@@ -8,5 +8,6 @@ export interface IUsersRes {
     dni: number;
     created_at: string;
     updated_at: string;
+    data?: any;
   }
   
