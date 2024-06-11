@@ -12,7 +12,7 @@ import { GetUserDataRemoteUseCase } from '../../../../Domain/useCases/userRemote
 export const ProfileInfoScreen = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-    const { removeSession, user, userData } = useViewModel();
+    const { removeSession, userLocal, userData } = useViewModel();
 
     return (
         <View style={styles.container}>
@@ -22,28 +22,33 @@ export const ProfileInfoScreen = () => {
                 style={styles.imageBackground}
             />
             <TouchableOpacity
-            style={styles.logout}
+                style={styles.logout}
                 onPress={() => {
                     removeSession()
                     navigation.navigate('HomeScreen')
                 }}
             >
-            <Image
-                source={require('../../../../../assets/logout.png')}
-                style={styles.logoutImage}
+                <Image
+                    source={require('../../../../../assets/logout.png')}
+                    style={styles.logoutImage}
                 />
             </TouchableOpacity>
 
             <View style={styles.logoContainer}>
-                <Image
-                    style={styles.logoImage}
-                    source={require('../../../../../assets/user_image.png')}
-                />
+            { 
+              userData?.image !== '' 
+                &&
+              <Image 
+                source={{ uri: userData?.image }}
+                style={ styles.logoImage }
+              />
+            }
+
             </View>
 
             <View style={styles.form}>
                 <View style={styles.formInfo}>
-                    <Image 
+                    <Image
                         source={require('../../../../../assets/user.png')}
                         style={styles.formIcon}
                     />
@@ -52,8 +57,8 @@ export const ProfileInfoScreen = () => {
                         <Text style={styles.formTextDescription}>Nombre del usuario</Text>
                     </View>
                 </View>
-                <View style={{...styles.formInfo, marginTop:25}}>
-                    <Image 
+                <View style={{ ...styles.formInfo, marginTop: 25 }}>
+                    <Image
                         source={require('../../../../../assets/email.png')}
                         style={styles.formIcon}
                     />
@@ -62,8 +67,8 @@ export const ProfileInfoScreen = () => {
                         <Text style={styles.formTextDescription}>Correo Electronico</Text>
                     </View>
                 </View>
-                <View style={{...styles.formInfo, marginTop:25, marginBottom:40}}>
-                    <Image 
+                <View style={{ ...styles.formInfo, marginTop: 25, marginBottom: 40 }}>
+                    <Image
                         source={require('../../../../../assets/description.png')}
                         style={styles.formIcon}
                     />
@@ -72,14 +77,14 @@ export const ProfileInfoScreen = () => {
                         <Text style={styles.formTextDescription}>Dni</Text>
                     </View>
                 </View>
-                <RoundedButton 
-                onPress={()=>{
-                    navigation.navigate('ProfileUpdateScreen')
-                 }}
-                text="Actualizar Información"
-            />
+                <RoundedButton
+                    onPress={() => {
+                        navigation.navigate('ProfileUpdateScreen', { user: userData! })
+                    }}
+                    text="Actualizar Información"
+                />
             </View>
-         
+
             {/* <Button
                
                 title='Cerrar Sesión'

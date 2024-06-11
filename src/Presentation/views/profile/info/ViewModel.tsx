@@ -6,9 +6,9 @@ import { IUsersRes } from "../../../../Domain/entities/User";
 
 
 const ProfileInfoViewModel = () => {
-    const { user } = useUserLocal();
+    const { userLocal } = useUserLocal();
     const [userData, setUserData] = useState<IUsersRes | null>(null);
-    const userId = user?.userId;
+    const userId = userLocal?.userId;
   
     const removeSession = async () => {
       await RemoveUserLocalUseCase();
@@ -32,7 +32,7 @@ const ProfileInfoViewModel = () => {
   
     return {
       removeSession,
-      user,
+      userLocal,
       userData,
     };
   };

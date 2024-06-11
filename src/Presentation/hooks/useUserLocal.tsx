@@ -4,7 +4,7 @@ import { GetUserLocalUseCase } from "../../Domain/useCases/userLocal/GetUserLoca
 
 export const useUserLocal = () => {
 
-    const [user, setUser] = useState<SessionPayload>()
+    const [userLocal, setUserLocal] = useState<SessionPayload>()
 
     useEffect(()=>{
         getUserSession();
@@ -12,8 +12,8 @@ export const useUserLocal = () => {
 
     const getUserSession = async () => {
         const user = await GetUserLocalUseCase();
-        setUser(user);
+        setUserLocal(user);
     };
     
-    return {user, getUserSession}
+    return {userLocal, getUserSession}
 }

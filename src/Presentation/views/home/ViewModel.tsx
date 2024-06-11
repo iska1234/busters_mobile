@@ -8,7 +8,7 @@ import { SaveUserLocalUseCase } from '../../../Domain/useCases/userLocal/SaveUse
 const HomeViewModel = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [values, setValues] = useState({ email: '', password: '' })
-    const {user, getUserSession} = useUserLocal()
+    const {userLocal, getUserSession} = useUserLocal()
 
 
     const onChange = (property: string, value: any) => {
@@ -50,7 +50,7 @@ const HomeViewModel = () => {
         onChange,
         login,
         errorMessage,
-        user
+        userLocal
     }
 }
 

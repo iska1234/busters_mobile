@@ -5,7 +5,8 @@ export interface IUsersRes {
     email: string;
     password: string;
     role: string;
-    dni: number;
+    dni: string;
+    image: string;
     created_at: string;
     updated_at: string;
     data?: any;

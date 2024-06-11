@@ -13,7 +13,7 @@ interface Props extends StackScreenProps<RootStackParamList, 'HomeScreen'>{};
 
 export const HomeScreen = ({navigation, route}: Props) => {
 
-    const { email, password, onChange, errorMessage, login, user } = useViewModel(); 
+    const { email, password, onChange, errorMessage, login, userLocal } = useViewModel(); 
 
     useEffect(() => {
         if (errorMessage != '') {
@@ -22,10 +22,10 @@ export const HomeScreen = ({navigation, route}: Props) => {
     }, [errorMessage])
 
     useEffect(() => {
-        if(user?.userId !== null && user?.userId !== undefined){
+        if(userLocal?.userId !== null && userLocal?.userId !== undefined){
             navigation.replace('UserTabsNavigation')
         }
-    },[user])
+    },[userLocal])
 
     return (
         <View style={styles.container}>

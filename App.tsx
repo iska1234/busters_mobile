@@ -5,11 +5,12 @@ import { HomeScreen } from './src/Presentation/views/home/Home';
 import { ProfileInfoScreen } from './src/Presentation/views/profile/info/ProfileInfo';
 import { UserTabsNavigation } from './src/Presentation/navigator/UserTabsNavigation';
 import { ProfileUpdateScreen } from './src/Presentation/views/profile/update/ProfileUpdate';
+import { IUsersRes } from './src/Domain/entities/User';
 
 export type RootStackParamList = {
     HomeScreen: undefined,
     UserTabsNavigation: undefined,
-    ProfileUpdateScreen: undefined,
+    ProfileUpdateScreen: {user: IUsersRes},
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
