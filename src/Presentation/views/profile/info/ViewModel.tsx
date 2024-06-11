@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { RemoveUserLocalUseCase } from "../../../Domain/useCases/userLocal/RemoveUserLocal";
-import { GetUserDataRemoteUseCase } from "../../../Domain/useCases/userRemote/GetDataUser";
-import { useUserLocal } from "../../hooks/useUserLocal";
-import { IUsersRes } from "../../../Domain/entities/User";
+import { RemoveUserLocalUseCase } from "../../../../Domain/useCases/userLocal/RemoveUserLocal";
+import { GetUserDataRemoteUseCase } from "../../../../Domain/useCases/userRemote/GetDataUser";
+import { useUserLocal } from "../../../hooks/useUserLocal";
+import { IUsersRes } from "../../../../Domain/entities/User";
 
 
 const ProfileInfoViewModel = () => {

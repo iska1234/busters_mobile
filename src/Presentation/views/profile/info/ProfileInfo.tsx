@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react'
 import { Button, Image, Text, TouchableOpacity, View } from 'react-native'
 import useViewModel from './ViewModel'
 import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
-import { RootStackParamList } from '../../../../App';
+import { RootStackParamList } from '../../../../../App';
 import styles from './Styles'
-import { RoundedButton } from '../../components/RoundedButton';
-import { CustomTextInput } from '../../components/CustomTextInput';
+import { RoundedButton } from '../../../components/RoundedButton';
+import { CustomTextInput } from '../../../components/CustomTextInput';
 import { useNavigation } from '@react-navigation/native';
-import { GetUserDataRemoteUseCase } from '../../../Domain/useCases/userRemote/GetDataUser';
+import { GetUserDataRemoteUseCase } from '../../../../Domain/useCases/userRemote/GetDataUser';
 
 export const ProfileInfoScreen = () => {
 
@@ -18,7 +18,7 @@ export const ProfileInfoScreen = () => {
         <View style={styles.container}>
 
             <Image
-                source={require('../../../../assets/chofer.png')}
+                source={require('../../../../../assets/chofer.png')}
                 style={styles.imageBackground}
             />
             <TouchableOpacity
@@ -29,7 +29,7 @@ export const ProfileInfoScreen = () => {
                 }}
             >
             <Image
-                source={require('../../../../assets/logout.png')}
+                source={require('../../../../../assets/logout.png')}
                 style={styles.logoutImage}
                 />
             </TouchableOpacity>
@@ -37,14 +37,14 @@ export const ProfileInfoScreen = () => {
             <View style={styles.logoContainer}>
                 <Image
                     style={styles.logoImage}
-                    source={require('../../../../assets/user_image.png')}
+                    source={require('../../../../../assets/user_image.png')}
                 />
             </View>
 
             <View style={styles.form}>
                 <View style={styles.formInfo}>
                     <Image 
-                        source={require('../../../../assets/user.png')}
+                        source={require('../../../../../assets/user.png')}
                         style={styles.formIcon}
                     />
                     <View style={styles.formContent}>
@@ -54,7 +54,7 @@ export const ProfileInfoScreen = () => {
                 </View>
                 <View style={{...styles.formInfo, marginTop:25}}>
                     <Image 
-                        source={require('../../../../assets/email.png')}
+                        source={require('../../../../../assets/email.png')}
                         style={styles.formIcon}
                     />
                     <View style={styles.formContent}>
@@ -64,7 +64,7 @@ export const ProfileInfoScreen = () => {
                 </View>
                 <View style={{...styles.formInfo, marginTop:25, marginBottom:40}}>
                     <Image 
-                        source={require('../../../../assets/description.png')}
+                        source={require('../../../../../assets/description.png')}
                         style={styles.formIcon}
                     />
                     <View style={styles.formContent}>
@@ -73,7 +73,9 @@ export const ProfileInfoScreen = () => {
                     </View>
                 </View>
                 <RoundedButton 
-                onPress={()=>{}}
+                onPress={()=>{
+                    navigation.navigate('ProfileUpdateScreen')
+                 }}
                 text="Actualizar Información"
             />
             </View>

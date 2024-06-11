@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { MyColors } from "../../theme/AppTheme";
+import { MyColors } from "../../../theme/AppTheme";
 
 
 const ProfileInfoStyles = StyleSheet.create({
@@ -33,7 +33,9 @@ const ProfileInfoStyles = StyleSheet.create({
     logoImage: {
         width: 180,
         height: 180,
-        borderRadius: 100
+        borderRadius: 100,
+        borderColor:'white',
+        borderWidth:2
     },
     formText: {
         fontWeight: 'bold',
