@@ -8,12 +8,13 @@ import { CustomTextInput } from '../../components/CustomTextInput';
 import { useNavigation } from '@react-navigation/native';
 import { RootStackParamList } from '../../../../App';
 import {StackNavigationProp, StackScreenProps} from '@react-navigation/stack'
+import { UserProvider } from '../../context/UserContext';
 
 interface Props extends StackScreenProps<RootStackParamList, 'HomeScreen'>{};
 
 export const HomeScreen = ({navigation, route}: Props) => {
 
-    const { email, password, onChange, errorMessage, login, userLocal } = useViewModel(); 
+    const { email, password, onChange, errorMessage, login, user } = useViewModel(); 
 
     useEffect(() => {
         if (errorMessage != '') {
@@ -22,13 +23,14 @@ export const HomeScreen = ({navigation, route}: Props) => {
     }, [errorMessage])
 
     useEffect(() => {
-        if(userLocal?.userId !== null && userLocal?.userId !== undefined){
+        if(user?.id !== null && user?.id !== undefined && user?.id !== 0){
             navigation.replace('UserTabsNavigation')
         }
-    },[userLocal])
+    },[user])
 
     return (
         <View style={styles.container}>
+
             <Image
                 source={require('../../../../assets/busters.png')}
                 style={styles.imageBackground}

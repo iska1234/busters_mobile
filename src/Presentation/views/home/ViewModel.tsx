@@ -1,15 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { LoginAuthUseCase } from '../../../Domain/useCases/Auth/LoginAuth'
 
 import { useUserLocal } from '../../hooks/useUserLocal'
 import { SaveUserLocalUseCase } from '../../../Domain/useCases/userLocal/SaveUserLocal'
+import { UserContext } from '../../context/UserContext'
 
 
 const HomeViewModel = () => {
     const [errorMessage, setErrorMessage] = useState('')
     const [values, setValues] = useState({ email: '', password: '' })
-    const {userLocal, getUserSession} = useUserLocal()
+    //const {userLocal, getUserSession} = useUserLocal()
 
+    const {user,  saveUserSession, getUserSession} = useContext(UserContext)
 
     const onChange = (property: string, value: any) => {
         setValues({ ...values, [property]: value })
@@ -21,9 +23,8 @@ const HomeViewModel = () => {
             if (!response.success) {
                 setErrorMessage(response.message);
             } else {
-                const responseData = response.data;
-                await SaveUserLocalUseCase(responseData);
-                getUserSession();
+               saveUserSession(response.data)
+               getUserSession()
             }
         }
     };
@@ -50,7 +51,7 @@ const HomeViewModel = () => {
         onChange,
         login,
         errorMessage,
-        userLocal
+        user
     }
 }
 

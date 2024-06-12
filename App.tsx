@@ -5,12 +5,14 @@ import { HomeScreen } from './src/Presentation/views/home/Home';
 import { ProfileInfoScreen } from './src/Presentation/views/profile/info/ProfileInfo';
 import { UserTabsNavigation } from './src/Presentation/navigator/UserTabsNavigation';
 import { ProfileUpdateScreen } from './src/Presentation/views/profile/update/ProfileUpdate';
-import { IUsersRes } from './src/Domain/entities/User';
+import { User } from './src/Domain/entities/User';
+import { UserProvider } from './src/Presentation/context/UserContext';
+
 
 export type RootStackParamList = {
     HomeScreen: undefined,
     UserTabsNavigation: undefined,
-    ProfileUpdateScreen: {user: IUsersRes},
+    ProfileUpdateScreen: { user: User },
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -18,37 +20,43 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 const App = () => {
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                screenOptions={{
-                    headerShown: false
-                }}
-            >
-                <Stack.Screen
-                    name="HomeScreen"
-                    component={HomeScreen}
-                    options={{ title: 'Welcome' }}
-                />
-
-                <Stack.Screen
-                    name="UserTabsNavigation"
-                    component={UserTabsNavigation}
-
-                />
-
-                <Stack.Screen
-                    name="ProfileUpdateScreen"
-                    component={ProfileUpdateScreen}
-                    options={{
-                        headerShown: true,
-                        title: 'Actualizar Usuario'
+            <UserState>
+                <Stack.Navigator
+                    screenOptions={{
+                        headerShown: false
                     }}
-
-                />
-
-
-            </Stack.Navigator>
+                >
+                    <Stack.Screen
+                        name="HomeScreen"
+                        component={HomeScreen}
+                        options={{ title: 'Welcome' }}
+                    />
+                    <Stack.Screen
+                        name="UserTabsNavigation"
+                        component={UserTabsNavigation}
+                    />
+                    <Stack.Screen
+                        name="ProfileUpdateScreen"
+                        component={ProfileUpdateScreen}
+                        options={{
+                            headerShown: true,
+                            title: 'Actualizar Usuario'
+                        }}
+                    />
+                </Stack.Navigator>
+            </UserState>
         </NavigationContainer>
     )
+
 }
+
+const UserState = ({ children }: any) => {
+    return (
+        <UserProvider>
+            {children}
+        </UserProvider>
+    )
+}
+
 
 export default App

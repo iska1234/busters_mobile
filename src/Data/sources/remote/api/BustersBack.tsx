@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { LocalStorage } from '../../local/LocalStorage';
-import { IUsersRes } from '../../../../Domain/entities/User';
 
 const ApiBusters = axios.create({
     baseURL: 'http://192.168.1.40:5500',
@@ -21,7 +20,7 @@ ApiBusters.interceptors.request.use(
     async (config) => {
         const token = await LocalStorage().getItem('token');
         if (token) {
-            config.headers!['Authorization'] = token as string;
+            config.headers!['Authorization'] = `Bearer ${token}`;
         }
         return config;
     },
@@ -34,7 +33,7 @@ ApiBustersImage.interceptors.request.use(
     async (config) => {
         const token = await LocalStorage().getItem('token');
         if (token) {
-            config.headers!['Authorization'] = token as string;
+            config.headers!['Authorization'] = `Bearer ${token}`;
         }
         return config;
     },

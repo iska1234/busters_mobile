@@ -1,40 +1,44 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useUserLocal } from "../../../hooks/useUserLocal";
 import * as ImagePicker from 'expo-image-picker'
-import { IUsersRes } from '../../../../Domain/entities/User';
+
 import { GetUserDataRemoteUseCase } from "../../../../Domain/useCases/userRemote/GetDataUser";
 
 import { ToastAndroid } from "react-native";
 import { UpdateUserWithImage } from "../../../../Domain/useCases/userRemote/UpdateUserImage";
 import { UpdateUser } from "../../../../Domain/useCases/userRemote/UpdateUser";
 import { ResponseApiBusters } from "../../../../Data/sources/remote/models/ResponseApiBusters";
+import { User } from "../../../../Domain/entities/User";
+import { UserContext } from "../../../context/UserContext";
 
 
-const ProfileUpdateViewModel = (user: IUsersRes) => {
+const ProfileUpdateViewModel = (user: User) => {
 
-    const{userLocal, getUserSession} = useUserLocal();
+    // const{userLocal, getUserSession} = useUserLocal();
+    // const userId = userLocal?.userId;
+    // const [userData, setUserData] = useState<User | null>(null);
     const [errorMessage, setErrorMessage] = useState('');
-    const [userData, setUserData] = useState<IUsersRes | null>(null);
+    const [successMessage, setSuccessMessage] = useState('');
     const [values, setValues] = useState(user);
     const [loading, setLoading] = useState(false);
     const [file, setFile] = useState<ImagePicker.ImagePickerAsset>();
-    const userId = userLocal?.userId;
+    const {saveUserSession,} = useContext(UserContext);
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-          try {
-            if (userId !== undefined) {
-              const response = await GetUserDataRemoteUseCase(userId); 
-              const userData = response.data
-              setUserData(userData);
-            }
-          } catch (error) {
-            console.error('Error al obtener los datos del usuario remoto:', error);
-          }
-        };
+    // useEffect(() => {
+    //     const fetchUserData = async () => {
+    //       try {
+    //         if (userId !== undefined) {
+    //           const response = await GetUserDataRemoteUseCase(userId); 
+    //           const userData = response.data
+    //           setUserData(userData);
+    //         }
+    //       } catch (error) {
+    //         console.error('Error al obtener los datos del usuario remoto:', error);
+    //       }
+    //     };
     
-        fetchUserData();
-      }, [userId]);
+    //     fetchUserData();
+    //   }, [userId]);
 
     const pickImage = async () => {
         let result = await ImagePicker.launchImageLibraryAsync({
@@ -77,17 +81,18 @@ const ProfileUpdateViewModel = (user: IUsersRes) => {
             try {
                 let response = {} as ResponseApiBusters;
                 if (values.image?.includes('https://')) {
-                    response = await UpdateUser(values, userId!)
+                    response = await UpdateUser(values, user.id!)
                 } else {
-                    response = await UpdateUserWithImage(values, userId!, file!);
+                    response = await UpdateUserWithImage(values, user.id!, file!);
                 }
 
+                setLoading(false)
                 if (response.success) {
-                    ToastAndroid.show('Usuario actualizado exitosamente', ToastAndroid.LONG);
+                    saveUserSession(response.data)
+                    setSuccessMessage(response.message)
                 } else {
                     setErrorMessage(response.message || 'Error al actualizar el usuario');
                 }
-                
             } catch (error:any) {
                 console.error('Error al actualizar el usuario:', error);
                 if (error.response) {
@@ -132,9 +137,9 @@ const ProfileUpdateViewModel = (user: IUsersRes) => {
         user,
         pickImage,
         takePhoto,
-        userData,
         update,
-        onChangeInfoUpdate
+        onChangeInfoUpdate,
+        successMessage
     }
 };
 

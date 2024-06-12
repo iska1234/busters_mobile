@@ -1,18 +1,19 @@
 import { UserRemoteRepository } from "../../Domain/repositories/UserRemoteRepository";
-import { IUsersRes } from "../../Domain/entities/User";
+
 import { ApiBusters, ApiBustersImage } from "../sources/remote/api/BustersBack";
 import { ImagePickerAsset } from "expo-image-picker";
 import { ResponseApiBusters } from "../sources/remote/models/ResponseApiBusters";
 import mime from 'mime'
 import { AxiosError } from "axios";
 import * as ImagePicker from 'expo-image-picker'
+import { User } from "../../Domain/entities/User";
 
 export class UserRemoteRepositoryImpl implements UserRemoteRepository {
 
 
-    async getUserData(userId: number): Promise<IUsersRes> {
+    async getUserData(userId: number): Promise<User> {
         try {
-            const response = await ApiBusters.get<IUsersRes>(`/users/data/${userId}`);
+            const response = await ApiBusters.get<User>(`/users/data/${userId}`);
             return Promise.resolve(response.data);
           
         } catch (error: any) {
@@ -20,7 +21,7 @@ export class UserRemoteRepositoryImpl implements UserRemoteRepository {
         }
     }
 
-    async updateUser(user: IUsersRes, userId: number): Promise<ResponseApiBusters> {
+    async updateUser(user: User, userId: number): Promise<ResponseApiBusters> {
         try {
             const response = await ApiBusters.put<ResponseApiBusters>(`/users/update/${userId}`, user);
             return Promise.resolve(response.data);
@@ -31,7 +32,7 @@ export class UserRemoteRepositoryImpl implements UserRemoteRepository {
         }
     }
 
-    async updateWithImage(user: IUsersRes, userId: number, file: ImagePicker.ImagePickerAsset): Promise<ResponseApiBusters> {
+    async updateWithImage(user: User, userId: number, file: ImagePicker.ImagePickerAsset): Promise<ResponseApiBusters> {
         try {
             let data = new FormData();
             if (file) {

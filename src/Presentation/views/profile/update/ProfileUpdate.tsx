@@ -25,7 +25,8 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
         pickImage,
         takePhoto,
         onChangeInfoUpdate,
-        update
+        update,
+        successMessage
     } = useViewModel(user);
     const [modalVisible, setModalVisible] = useState(false)
 
@@ -34,6 +35,12 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
             ToastAndroid.show(errorMessage, ToastAndroid.LONG)
         }
     }, [errorMessage])
+
+    useEffect(() => {
+        if (successMessage != '') {
+            ToastAndroid.show(successMessage, ToastAndroid.LONG)
+        }
+    }, [successMessage])
 
 
     useEffect(() => {

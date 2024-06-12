@@ -12,7 +12,13 @@ import { GetUserDataRemoteUseCase } from '../../../../Domain/useCases/userRemote
 export const ProfileInfoScreen = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-    const { removeSession, userLocal, userData } = useViewModel();
+    const { removeUserSession, user } = useViewModel();
+
+    useEffect(()=>{
+        if(user.id === 0 && user !== undefined){
+            navigation.navigate('HomeScreen')
+        }
+    },[user])
 
     return (
         <View style={styles.container}>
@@ -24,8 +30,8 @@ export const ProfileInfoScreen = () => {
             <TouchableOpacity
                 style={styles.logout}
                 onPress={() => {
-                    removeSession()
-                    navigation.navigate('HomeScreen')
+                    removeUserSession()
+                   
                 }}
             >
                 <Image
@@ -36,10 +42,10 @@ export const ProfileInfoScreen = () => {
 
             <View style={styles.logoContainer}>
             { 
-              userData?.image !== '' 
+              user?.image !== '' 
                 &&
               <Image 
-                source={{ uri: userData?.image }}
+                source={{ uri: user?.image }}
                 style={ styles.logoImage }
               />
             }
@@ -53,7 +59,7 @@ export const ProfileInfoScreen = () => {
                         style={styles.formIcon}
                     />
                     <View style={styles.formContent}>
-                        <Text>{userData?.name} {userData?.lastname}</Text>
+                        <Text>{user?.name} {user?.lastname}</Text>
                         <Text style={styles.formTextDescription}>Nombre del usuario</Text>
                     </View>
                 </View>
@@ -63,7 +69,7 @@ export const ProfileInfoScreen = () => {
                         style={styles.formIcon}
                     />
                     <View style={styles.formContent}>
-                        <Text>{userData?.email}</Text>
+                        <Text>{user?.email}</Text>
                         <Text style={styles.formTextDescription}>Correo Electronico</Text>
                     </View>
                 </View>
@@ -73,13 +79,13 @@ export const ProfileInfoScreen = () => {
                         style={styles.formIcon}
                     />
                     <View style={styles.formContent}>
-                        <Text>{userData?.dni}</Text>
+                        <Text>{user?.dni}</Text>
                         <Text style={styles.formTextDescription}>Dni</Text>
                     </View>
                 </View>
                 <RoundedButton
                     onPress={() => {
-                        navigation.navigate('ProfileUpdateScreen', { user: userData! })
+                        navigation.navigate('ProfileUpdateScreen', { user: user! })
                     }}
                     text="Actualizar Información"
                 />
