@@ -1,5 +1,4 @@
-import { useNavigation } from "@react-navigation/native";
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import {  StackScreenProps } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../../App';
 import { Image, Text, ToastAndroid, TouchableOpacity, View } from "react-native";
 import styles from './Styles'
@@ -14,7 +13,7 @@ interface Props extends StackScreenProps<RootStackParamList, 'ProfileUpdateScree
 export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
 
     const { user } = route.params;
-    const { 
+    const {
         name,
         lastname,
         image,
@@ -58,21 +57,16 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
                 style={styles.imageBackground}
             />
             <View style={styles.logoContainer}>
-                <TouchableOpacity onPress={() => setModalVisible(true)}>
-                    {
-                        image == ''
-                            ?
-                            <Image
-                                style={styles.logoImage}
-                                source={require('../../../../../assets/user_image.png')}
-                            />
-                            :
-                            <Image
-                                style={styles.logoImage}
-                                source={{ uri: image }}
-                            />
-                    }
-                </TouchableOpacity>
+            <TouchableOpacity onPress={() => setModalVisible(true)}>
+        <Image
+          style={styles.logoImage}
+          source={
+            !image
+              ? require('../../../../../assets/user_image.png')
+              : { uri: image }
+          }
+        />
+      </TouchableOpacity>
                 <Text style={styles.logoText}>Selecciona una Imagen</Text>
             </View>
             <View style={styles.form}>
@@ -105,7 +99,7 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
                     style={{ marginTop: 30 }}
                 >
 
-                    <RoundedButton text='ACTUALIZAR INFORMACIÓN'onPress={handleUpdate} />
+                    <RoundedButton text='ACTUALIZAR INFORMACIÓN' onPress={handleUpdate} />
                 </View>
 
 

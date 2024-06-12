@@ -1,24 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Button, Image, Text, TouchableOpacity, View } from 'react-native'
+import React, { useEffect,  } from 'react'
+import {  Image, Text, TouchableOpacity, View } from 'react-native'
 import useViewModel from './ViewModel'
-import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import { StackNavigationProp, } from '@react-navigation/stack';
 import { RootStackParamList } from '../../../../../App';
 import styles from './Styles'
 import { RoundedButton } from '../../../components/RoundedButton';
-import { CustomTextInput } from '../../../components/CustomTextInput';
 import { useNavigation } from '@react-navigation/native';
-import { GetUserDataRemoteUseCase } from '../../../../Domain/useCases/userRemote/GetDataUser';
+
 
 export const ProfileInfoScreen = () => {
 
     const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
     const { removeUserSession, user } = useViewModel();
 
-    useEffect(()=>{
-        if(user.id === 0 && user !== undefined){
+    useEffect(() => {
+        if (user.id === 0 && user !== undefined) {
             navigation.navigate('HomeScreen')
         }
-    },[user])
+    }, [user])
 
     return (
         <View style={styles.container}>
@@ -31,7 +30,7 @@ export const ProfileInfoScreen = () => {
                 style={styles.logout}
                 onPress={() => {
                     removeUserSession()
-                   
+
                 }}
             >
                 <Image
@@ -39,19 +38,16 @@ export const ProfileInfoScreen = () => {
                     style={styles.logoutImage}
                 />
             </TouchableOpacity>
-
             <View style={styles.logoContainer}>
-            { 
-              user?.image !== '' 
-                &&
-              <Image 
-                source={{ uri: user?.image }}
-                style={ styles.logoImage }
-              />
-            }
-
+                <Image
+                    style={styles.logoImage}
+                    source={
+                        !user.image
+                            ? require('../../../../../assets/user_image.png')
+                            : { uri: user.image }
+                    }
+                />
             </View>
-
             <View style={styles.form}>
                 <View style={styles.formInfo}>
                     <Image
@@ -90,11 +86,6 @@ export const ProfileInfoScreen = () => {
                     text="Actualizar Información"
                 />
             </View>
-
-            {/* <Button
-               
-                title='Cerrar Sesión'
-            /> */}
         </View>
     )
 }

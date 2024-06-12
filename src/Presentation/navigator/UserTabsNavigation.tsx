@@ -22,8 +22,7 @@ export const UserTabsNavigation = () => {
         name="OrderListScreen"
         component={OrderListScreen}
         options={{
-          title: 'Orders',
-          tabBarLabel: 'Orders',
+          headerShown:false,
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../../../assets/orders.png')}
