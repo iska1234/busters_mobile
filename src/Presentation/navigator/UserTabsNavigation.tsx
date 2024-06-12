@@ -3,6 +3,7 @@ import { OrderListScreen } from "../views/user/Order/OrderList";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MyColors } from '../theme/AppTheme';
+import { ClientAddressMap } from "../views/user/Address/AddressMap";
 
 const Tab = createBottomTabNavigator();
 
@@ -22,6 +23,20 @@ export const UserTabsNavigation = () => {
         options={{
           title: 'Orders',
           tabBarLabel: 'Orders',
+          tabBarIcon: ({ color }) => (
+            <Image
+              source={require('../../../assets/orders.png')}
+              style={{ width: 25, height: 25 }}
+            />
+          )
+        }}
+      />
+      <Tab.Screen
+        name="ClientAddressMap"
+        component={ClientAddressMap}
+        options={{
+          title: 'Address',
+          tabBarLabel: 'Address',
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../../../assets/orders.png')}

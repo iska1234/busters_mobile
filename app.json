@@ -24,13 +24,32 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier":"com.cavero.busterschoferes",
+      "config":{
+        "googleMapsApiKey":"AIzaSyA8IVyUZqTq67OCzDD5eAMpdkLvbqndH-U"
+      },
+      "infoPlist":{
+        "UIBackgroundModes":[
+          "location",
+          "fetch"
+        ]
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package":"com.cavero.busterschoferes",
+      "config":{
+        "googleMaps":{
+          "apiKey":"AIzaSyA8IVyUZqTq67OCzDD5eAMpdkLvbqndH-U"
+        }
+      },
+      "permissions":[
+        "ACCESS_BACKGROUND_LOCATION"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
