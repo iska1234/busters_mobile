@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react'
-import { Orders } from '../../../../Domain/entities/Orders';
-import { GetByUserUseCase } from '../../../../Domain/useCases/orders/GetByUser';
-import { UserContext } from '../../../context/UserContext';
+import { Orders } from '../../../../../Domain/entities/Orders';
+import { GetByUserUseCase } from '../../../../../Domain/useCases/orders/GetByUser';
+import { UserContext } from '../../../../context/UserContext';
 
 const OrderListViewModel = () => {
 

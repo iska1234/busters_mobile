@@ -1,9 +1,10 @@
 import { ProfileInfoScreen } from "../views/profile/info/ProfileInfo";
-import { OrderListScreen } from "../views/user/Order/OrderList";
+import { OrderListScreen } from "../views/user/Order/list/OrderList";
 import { Image } from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MyColors } from '../theme/AppTheme';
 import { ClientAddressMapScreen } from "../views/user/Address/AddressMap";
+import { OrderStackNavigator } from "./OrderNavigator";
 
 
 const Tab = createBottomTabNavigator();
@@ -19,10 +20,11 @@ export const UserTabsNavigation = () => {
 
     >
       <Tab.Screen
-        name="OrderListScreen"
-        component={OrderListScreen}
+        name="OrderStackNavigator"
+        component={OrderStackNavigator}
         options={{
           headerShown:false,
+          tabBarLabel: 'Orders',
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../../../assets/orders.png')}

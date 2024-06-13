@@ -2,8 +2,11 @@ import React, { useEffect } from 'react'
 import { FlatList, Text, useWindowDimensions, View } from 'react-native'
 import useViewModel from './ViewModel'
 import { SceneMap, TabBar, TabView } from 'react-native-tab-view';
-import { MyColors } from '../../../theme/AppTheme';
+import { MyColors } from '../../../../theme/AppTheme';
 import { OrderListItem } from './Item';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { OrderStackParamList } from '../../../../navigator/OrderNavigator';
 
 interface Props {
     status: string;
@@ -12,18 +15,19 @@ interface Props {
 export const OrderListView = ({ status }: Props) => {
 
     const { address, getAddress } = useViewModel();
+    const navigation = useNavigation<StackNavigationProp<OrderStackParamList, 'OrderListScreen'>>()
 
     useEffect(() => {
         getAddress(status)
     }, [])
 
     return (
-        <View >
+        <View>
             <FlatList
                 data={address}
                 keyExtractor={(item) => item.id!.toString()}
                 renderItem={({ item }) =>
-                    <OrderListItem order={item}/>
+                    <OrderListItem order={item} navigation={navigation}/>
                 }
             />
         </View>
