@@ -1,8 +1,9 @@
 import * as Location from 'expo-location'
 import React, { useEffect, useRef, useState } from 'react'
 import MapView, { Camera } from 'react-native-maps';
+import { Orders } from '../../../../../Domain/entities/Orders';
 
-const OrderMapViewModel = () => {
+const OrderMapViewModel = (order: Orders) => {
 
   const [messagePermissions, setMessagePermissions] = useState('');
   const [position, setPosition] = useState<Location.LocationObjectCoords>()
@@ -11,6 +12,19 @@ const OrderMapViewModel = () => {
     latitude: 0.0,
     longitude: 0.0,
     });
+  const [origin, setOrigin] = useState({
+    latitude: 0.0,
+    longitude: 0.0
+  })
+
+  const destinationLatitude = typeof order.lat === 'string' ? parseFloat(order.lat) : order.lat;
+  const destinationLongitude = typeof order.lng === 'string' ? parseFloat(order.lng) : order.lng;
+
+  const [destination, setDestination] = useState({
+    latitude: destinationLatitude,
+    longitude: destinationLongitude,
+  });
+  
   const mapRef = useRef<MapView | null>(null)
   let positionSuscription: Location.LocationSubscription;
 
@@ -39,8 +53,11 @@ const OrderMapViewModel = () => {
     }
 
     const location = await Location.getLastKnownPositionAsync()
-    setPosition(location?.coords)
-  
+    setPosition(location?.coords);
+    setOrigin({
+      latitude: location?.coords.latitude!,
+      longitude: location?.coords.longitude!,
+    })
     const newCamera: Camera = {
       center: { latitude: location?.coords.latitude!, longitude: location?.coords.longitude! },
       zoom: 14,
@@ -57,7 +74,7 @@ const OrderMapViewModel = () => {
         accuracy: Location.Accuracy.BestForNavigation
       },
       location => {
-        console.log('POSITION: ' + JSON.stringify(location?.coords, null, 3));
+
         setPosition(location?.coords)
       }
     )
@@ -100,6 +117,8 @@ const OrderMapViewModel = () => {
     position,
     mapRef,
     ...refPoint,
+    destination,
+    origin,
     onRegionChangeComplete,
     stopForegroundUpdate
   }

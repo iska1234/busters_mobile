@@ -8,11 +8,12 @@ import { StackScreenProps } from '@react-navigation/stack'
 import { OrderStackParamList } from '../../../../navigator/OrderNavigator'
 import { RoundedButton } from '../../../../components/RoundedButton'
 
+
 interface Props extends StackScreenProps<OrderStackParamList, 'OrderAddressMapScreen'> { };
 export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
 
-  const { messagePermissions, position, mapRef, stopForegroundUpdate } = useViewModel();
   const { order } = route.params;
+  const { messagePermissions, position, mapRef, stopForegroundUpdate, destination, latitude, longitude, origin } = useViewModel(order);
 
   useEffect(() => {
     if (messagePermissions != '') {
@@ -49,6 +50,31 @@ export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
             />
           </Marker>
         }
+         {
+          destination !== undefined &&
+          <Marker
+          coordinate={{
+            latitude: destination.latitude,
+            longitude: destination.longitude
+          }}>
+
+            <Image
+              style={styles.markerImage}
+              source={require('../../../../../../assets/home.png')}
+            />
+          </Marker>
+        }
+        {/* {
+          origin.latitude !== 0.0 &&
+          <MapViewDirections
+            origin={origin}
+            destination={destination}
+            apikey={GOOGLE_MAPS_APIKEY}
+            strokeWidth={3}
+            strokeColor='hotpink'
+          />
+        } */}
+
 
       </MapView>
 
