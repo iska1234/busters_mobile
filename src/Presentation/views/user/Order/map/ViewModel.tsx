@@ -2,6 +2,8 @@ import * as Location from 'expo-location'
 import React, { useEffect, useRef, useState } from 'react'
 import MapView, { Camera } from 'react-native-maps';
 import { Orders } from '../../../../../Domain/entities/Orders';
+import socket from '../../../../utils/SocketIO'
+
 
 const OrderMapViewModel = (order: Orders) => {
 
@@ -28,8 +30,12 @@ const OrderMapViewModel = (order: Orders) => {
   const mapRef = useRef<MapView | null>(null)
   let positionSuscription: Location.LocationSubscription;
 
-
   useEffect(() => {
+
+    socket.connect();
+    socket.on('connect',() =>{
+    })
+
     const requestPermissions = async () => {
       const foreground = await Location.requestForegroundPermissionsAsync();
 
@@ -71,9 +77,13 @@ const OrderMapViewModel = (order: Orders) => {
 
     positionSuscription = await Location.watchPositionAsync(
       {
-        accuracy: Location.Accuracy.BestForNavigation
+        accuracy: Location.Accuracy.Balanced
       },
       location => {
+        socket.emit('position-test', {
+          lat: location.coords.latitude,
+          lng: location.coords.longitude
+        })
 
         setPosition(location?.coords)
       }
@@ -119,6 +129,7 @@ const OrderMapViewModel = (order: Orders) => {
     ...refPoint,
     destination,
     origin,
+    socket,
     onRegionChangeComplete,
     stopForegroundUpdate
   }

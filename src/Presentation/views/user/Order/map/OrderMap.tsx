@@ -13,7 +13,7 @@ interface Props extends StackScreenProps<OrderStackParamList, 'OrderAddressMapSc
 export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
 
   const { order } = route.params;
-  const { messagePermissions, position, mapRef, stopForegroundUpdate, destination, latitude, longitude, origin } = useViewModel(order);
+  const { messagePermissions, position, mapRef, stopForegroundUpdate, destination, socket, latitude, longitude, origin } = useViewModel(order);
 
   useEffect(() => {
     if (messagePermissions != '') {
@@ -25,6 +25,7 @@ export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
     const unsuscribe = navigation.addListener('beforeRemove', () => {
       console.log('Evento Before Remove')
       stopForegroundUpdate();
+      socket.disconnect();
     })
 
     return unsuscribe;
