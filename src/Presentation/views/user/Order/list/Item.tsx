@@ -13,7 +13,7 @@ interface Props {
 export const OrderListItem = ({ order, navigation }: Props) => {
     return (
         <TouchableOpacity
-            onPress={() => navigation.navigate('OrderDetailScreen',{order: order})}
+            onPress={() => navigation.navigate('OrderAddressMapScreen',{order: order})}
         >
             <View style={styles.cardContainer}>
                 <View style={styles.card}>
