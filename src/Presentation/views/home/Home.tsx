@@ -44,11 +44,11 @@ export const HomeScreen = ({navigation, route}: Props) => {
             </View>
 
             <View style={styles.form}>
-                <Text style={styles.formText}>Ingresar</Text>
+                <Text style={styles.formText}>Get into</Text>
                 <CustomTextInput
                     image={require("../../../../assets/email.png")}
                     value={email}
-                    placeholder='Correo Electronico'
+                    placeholder='Email'
                     keyboard='email-address'
                     property='email'
                     onChangeText={onChange}
@@ -56,7 +56,7 @@ export const HomeScreen = ({navigation, route}: Props) => {
                 <CustomTextInput
                     image={require("../../../../assets/password.png")}
                     value={password}
-                    placeholder='Contraseña'
+                    placeholder='Password'
                     keyboard='default'
                     property='password'
                     secureTextEntry={true}
@@ -66,7 +66,7 @@ export const HomeScreen = ({navigation, route}: Props) => {
                     style={{ marginTop: 30 }}
                 >
 
-                    <RoundedButton text='INGRESAR' onPress={() => login()} />
+                    <RoundedButton text='LOG IN' onPress={() => login()} />
                 </View>
 
 

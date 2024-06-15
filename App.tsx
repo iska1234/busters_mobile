@@ -40,7 +40,7 @@ const App = () => {
                         component={ProfileUpdateScreen}
                         options={{
                             headerShown: true,
-                            title: 'Actualizar Usuario'
+                            title: 'Update User'
                         }}
                     />
                 </Stack.Navigator>

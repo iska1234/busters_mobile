@@ -49,8 +49,8 @@ export const UserTabsNavigation = () => {
         name="ProfileInfoScreen"
         component={ProfileInfoScreen}
         options={{
-          title: 'Perfil',
-          tabBarLabel: 'Perfil',
+          title: 'Profile',
+          tabBarLabel: 'Profile',
           tabBarIcon: ({ color }) => (
             <Image
               source={require('../../../assets/user_menu.png')}

@@ -56,7 +56,7 @@ export const ProfileInfoScreen = () => {
                     />
                     <View style={styles.formContent}>
                         <Text>{user?.name} {user?.lastname}</Text>
-                        <Text style={styles.formTextDescription}>Nombre del usuario</Text>
+                        <Text style={styles.formTextDescription}>User names</Text>
                     </View>
                 </View>
                 <View style={{ ...styles.formInfo, marginTop: 25 }}>
@@ -66,7 +66,7 @@ export const ProfileInfoScreen = () => {
                     />
                     <View style={styles.formContent}>
                         <Text>{user?.email}</Text>
-                        <Text style={styles.formTextDescription}>Correo Electronico</Text>
+                        <Text style={styles.formTextDescription}>Email</Text>
                     </View>
                 </View>
                 <View style={{ ...styles.formInfo, marginTop: 25, marginBottom: 40 }}>
@@ -76,14 +76,14 @@ export const ProfileInfoScreen = () => {
                     />
                     <View style={styles.formContent}>
                         <Text>{user?.dni}</Text>
-                        <Text style={styles.formTextDescription}>Dni</Text>
+                        <Text style={styles.formTextDescription}>ID</Text>
                     </View>
                 </View>
                 <RoundedButton
                     onPress={() => {
                         navigation.navigate('ProfileUpdateScreen', { user: user! })
                     }}
-                    text="Actualizar Información"
+                    text="UPDATE INFORMATION"
                 />
             </View>
         </View>

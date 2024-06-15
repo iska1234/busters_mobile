@@ -67,7 +67,7 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
           }
         />
       </TouchableOpacity>
-                <Text style={styles.logoText}>Selecciona una Imagen</Text>
+                <Text style={styles.logoText}>Select an Image</Text>
             </View>
             {/* <View style={styles.form}>
                 <Text style={styles.formText}>Actualizar Datos</Text>

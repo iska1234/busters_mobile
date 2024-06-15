@@ -42,7 +42,7 @@ export const OrderListView = ({ status }: Props) => {
 
     return (
         <View style={{ flex: 1 }}>
-<Button title="Refrescar Lista" onPress={handleButtonPress} />
+            <Button title="Refresh List" onPress={handleButtonPress} />
             <FlatList
                 data={
                     status === 'EN CAMINO'
@@ -85,9 +85,9 @@ export const OrderListScreen = () => {
     const [index, setIndex] = React.useState(0);
 
     const [routes] = React.useState([
-        { key: 'first', title: 'EN CAMINO' },
-        { key: 'second', title: 'EN PROCESO' },
-        { key: 'third', title: 'COMPLETADA' }
+        { key: 'first', title: 'ON THE WAY' },
+        { key: 'second', title: 'IN PROGRESS' },
+        { key: 'third', title: 'COMPLETED' }
     ])
 
     return (

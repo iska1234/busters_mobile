@@ -58,7 +58,9 @@ const DeliveryOrderMapStyles = StyleSheet.create({
         height: 30
     },
     infoTitle: {
-        color: 'black'
+        fontWeight: 'bold',
+        color:'#1f2937',
+        fontSize: 15,
     },
     infoDescription: {
         color: '#1f2937',

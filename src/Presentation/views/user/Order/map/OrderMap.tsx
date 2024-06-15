@@ -84,7 +84,7 @@ export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
       <View style={styles.info}>
         <View style={styles.infoRow}>
           <View style={styles.infoText}>
-            <Text style={styles.infoTitle}>Direccion de Entrega</Text>
+            <Text style={styles.infoTitle}>Delivery address</Text>
             <Text style={styles.infoDescription}>{order.clientreference}</Text>
           </View>
           <Image
@@ -100,7 +100,7 @@ export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
             style={styles.imageClient}
             source={require('../../../../../../assets/user.png')}
           />
-          <Text style={styles.nameClient}>Nombre del Cliente</Text>
+          <Text style={styles.nameClient}>Customer name</Text>
           <Text >{order.clientname}</Text>
         </View>
         <View style={styles.infoClient}>
@@ -108,12 +108,12 @@ export const OrderAddressMapScreen = ({ navigation, route }: Props) => {
             style={styles.imageClient}
             source={require('../../../../../../assets/phone.png')}
           />
-          <Text style={styles.nameClient}>Teléfono</Text>
+          <Text style={styles.nameClient}>Customer phone</Text>
           <Text>{order.clientphone}</Text>
         </View>
         <View style={styles.buttonRefPoint}>
           <RoundedButton
-            text='ACTUALIZAR ENTREGA'
+            text='UPDATE DELIVERY'
             onPress={() => { }}
           />
         </View>
