@@ -3,11 +3,14 @@ export interface Orders {
     userId: number;
     lat:number;
     lng: number;
-    reference:string;
     status?: string;
     timestamp?: bigint;
     created_at: string;
     updated_at: string;
     data?: any;
+    clientId?:number;
+    clientname?: string;
+    clientphone?:string;
+    clientreference?:string;
   }
   

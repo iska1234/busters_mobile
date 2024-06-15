@@ -7,13 +7,13 @@ const RegisterStyles = StyleSheet.create({
     },
     imageBackground: {
         width: '100%',
-        height: '60%',
+        height: '100%',
         opacity: 0.6,
         bottom: '0%'
     },
     form: {
         width: '100%',
-        height: '50%',
+        height: '100%',
         backgroundColor: 'white',
         position: 'absolute',
         bottom: 0,
@@ -60,14 +60,16 @@ const RegisterStyles = StyleSheet.create({
         alignItems: 'center'
     },
     logoImage: {
-        width: 100,
-        height: 100,
-        borderRadius: 50,
+        width: 300,
+        height: 300,
+        borderRadius: 150,
+        borderColor:'white',
+        borderWidth:1
     },
     logoText: {
         color: 'white',
         textAlign: 'center',
-        fontSize: 18,
+        fontSize: 30,
         marginTop: 10,
         fontWeight: 'bold'
     },

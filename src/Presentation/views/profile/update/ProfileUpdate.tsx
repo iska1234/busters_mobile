@@ -69,7 +69,7 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
       </TouchableOpacity>
                 <Text style={styles.logoText}>Selecciona una Imagen</Text>
             </View>
-            <View style={styles.form}>
+            {/* <View style={styles.form}>
                 <Text style={styles.formText}>Actualizar Datos</Text>
                 <CustomTextInput
                     image={require("../../../../../assets/user.png")}
@@ -103,7 +103,7 @@ export const ProfileUpdateScreen = ({ navigation, route }: Props) => {
                 </View>
 
 
-            </View>
+            </View> */}
             <ModalPickImage
                 openGallery={pickImage}
                 openCamera={takePhoto}

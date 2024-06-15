@@ -19,7 +19,7 @@ export const OrderListItem = ({ order, navigation }: Props) => {
                 <View style={styles.card}>
                     <Text style={styles.order}>Order #{order.id}</Text>
                     <Text style={styles.info}>Fecha del pedido: {DateFormatter(order.timestamp!)}</Text>
-                    <Text style={styles.info}>Dirección: {order.reference}</Text>
+                    <Text style={styles.info}>Dirección: {order.clientreference}</Text>
                 </View>
             </View>
         </TouchableOpacity>

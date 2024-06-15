@@ -39,7 +39,7 @@ export const ModalPickImage = ({ openGallery, openCamera, modalUseState, setModa
 
                             <RoundedButton
                                 onPress={() => {
-                                    openGallery()
+                                    openCamera()
                                     setModalUseState(false)
                                 }}
                                 text='Camera'
